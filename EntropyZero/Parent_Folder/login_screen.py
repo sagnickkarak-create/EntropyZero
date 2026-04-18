@@ -72,8 +72,8 @@ class Login_Screen(ctk.CTkFrame):
         
         try : 
             # to feed to mysql
-            username = self.Username.get()
-            password = self.Password.get()
+            username = self.Username.get().strip()
+            password = self.Password.get().strip()
 
             if username=='' or password=='':
                 messagebox.showwarning('Credentials', 'Enter Proper Credentials\n(tip : left anything blank ?)')
