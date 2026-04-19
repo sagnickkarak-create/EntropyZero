@@ -72,10 +72,15 @@ class Signup_Screen(ctk.CTkFrame):
         username=self.Username.get().strip()
         password=self.Password.get().strip()
         path=self.Target_Path.get().strip()
+
         try :
 
             if username == '' or password == '' or path == '':
                 messagebox.showwarning('EntropyZero', 'Enter the required credentials\n(tip : left anything blank ??)')
+
+            if os.path.exists(path) == False :
+                messagebox.showerror('Error', 'Given path doesn\'t exist locally')
+                
             else :
                 response = messagebox.askquestion('Confirm Credentials', f'username : {username}\npassword : {password}\npath : {path}')
                 if response == 'yes' :
@@ -92,10 +97,10 @@ class Signup_Screen(ctk.CTkFrame):
                     messagebox.showinfo('EntropyZero', 'Be Cautious This Time')
                 
         except Exception as error:
+
             if '1062' in str(error): # 1062 is the error code for unique constraint
                 messagebox.showerror('Error', 'Username already taken')
-            elif os.path.exists(path) == False :
-                messagebox.showerror('Error', 'Given path doesnt exist locally')
+            
             else:
                 messagebox.showerror('Error', f'MySQL error : {error}')
         
