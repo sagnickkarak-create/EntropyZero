@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from PIL import Image
 from tkinter import messagebox
+import os
 
 Image.MAX_IMAGE_PIXELS = None
 
@@ -93,8 +94,10 @@ class Signup_Screen(ctk.CTkFrame):
         except Exception as error:
             if '1062' in str(error): # 1062 is the error code for unique constraint
                 messagebox.showerror('Error', 'Username already taken')
+            elif os.path.exists(path) == False :
+                messagebox.showerror('Error', 'Given path doesnt exist locally')
             else:
-                messagebox.showerror('error', f'MySQL error : {error}')
+                messagebox.showerror('Error', f'MySQL error : {error}')
         
         
 
