@@ -34,6 +34,14 @@ class Tunnel:
         except Exception as error:
             raise error
         
+    def fetch_rules(self):
+        try:
+            cursor = self.db.cursor(dictionary=True) # a unique cursor for this method which returns stuff in a dictionary
+            cursor.execute('select * from rules')
+            self.rules = cursor.fetchall()
+        except Exception as error:
+            raise error
+        
     def close_connection(self):
         if self.cursor : # checks if it exists
             self.cursor.close()
