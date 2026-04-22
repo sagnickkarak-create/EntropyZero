@@ -11,7 +11,7 @@ class FolderBuilder:
         self.tunnel.fetch_rules()
         self.rules = self.tunnel.rules
         for i in self.rules :
-            print(i)
+            print(f"{i['EXTENSION']}  -->  {i['PATH']}")
 
 if __name__=='__main__':
     path = r'C:\Users\skull\Downloads'
