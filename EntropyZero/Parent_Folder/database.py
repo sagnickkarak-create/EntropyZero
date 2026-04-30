@@ -41,6 +41,12 @@ class Tunnel:
             self.rules = cursor.fetchall()
         except Exception as error:
             raise error
+
+    def path_getter(self, username): # to get the target path by the user
+        try:
+            self.cursor(f'select target_root where username={username}')
+        except Exception as error:
+            raise error
         
     def close_connection(self):
         if self.cursor : # checks if it exists

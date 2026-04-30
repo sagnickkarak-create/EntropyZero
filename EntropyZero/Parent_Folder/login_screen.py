@@ -72,14 +72,14 @@ class Login_Screen(ctk.CTkFrame):
         
         try : 
             # to feed to mysql
-            username = self.Username.get().strip()
+            self.username = self.Username.get().strip()
             password = self.Password.get().strip()
 
-            if username=='' or password=='':
+            if self.username=='' or password=='':
                 messagebox.showwarning('Credentials', 'Enter Proper Credentials\n(tip : left anything blank ?)')
             else:
                 # check user
-                if self.db.check_user(username, password):
+                if self.db.check_user(self.username, password):
                     messagebox.showinfo('EntropyZero', 'Welcome !')
 
                     # change screen
@@ -93,5 +93,6 @@ class Login_Screen(ctk.CTkFrame):
     def signup_button_func(self, command):
         command('signup_screen')
         self.signup_button.configure(state='disabled')
-        
 
+    def current_user_return(self):
+        return self.username

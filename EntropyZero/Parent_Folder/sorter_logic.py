@@ -1,11 +1,14 @@
 import os
 import shutil 
 from database import Tunnel
+from login_screen import Login_Screen
 
 class FolderBuilder:
     def __init__(self, path):
         self.path = path
         self.tunnel = Tunnel()
+        self.username = Login_Screen.current_user_return()
+        print(self.username)
     
     def info_getter(self):
         self.tunnel.fetch_rules()
@@ -21,6 +24,9 @@ class FolderBuilder:
         for i in self.folders:
             os.makedirs(i)
         print("DONE!")
+
+    def filename_getter(self):
+        pass
 
     def mover(self):
         pass
