@@ -81,9 +81,10 @@ class Login_Screen(ctk.CTkFrame):
                 # check user
                 if self.db.check_user(self.username, password):
                     messagebox.showinfo('EntropyZero', 'Welcome !')
-
                     # change screen
                     command('sorter_screen')
+                    self.current_user_return()
+                
                 else:
                     messagebox.showerror('EntropyZero', 'Invalid Username or Password')
 
@@ -95,4 +96,4 @@ class Login_Screen(ctk.CTkFrame):
         self.signup_button.configure(state='disabled')
 
     def current_user_return(self):
-        return self.username
+        self.current_user =  self.username
