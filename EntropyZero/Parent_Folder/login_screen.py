@@ -10,11 +10,8 @@ ctk.set_appearance_mode("dark")
 banner = Image.open(r"E:\CS PROJECT YOHO\EntropyZero\assets\LOGIN.png")
 
 class Login_Screen(ctk.CTkFrame):
-    def __init__(self, master, switch_command, database_instance):
+    def __init__(self, master, switch_command, login_func):
         super().__init__(master, bg_color='#000000')
-
-        # saving database instance
-        self.db = database_instance
         
         # Banner 
         w = self.winfo_screenwidth()
@@ -65,35 +62,9 @@ class Login_Screen(ctk.CTkFrame):
                                              corner_radius=30,
                                              width=100,
                                              height=100,
-                                             command= lambda: self.continue_button_func(switch_command))
+                                             command= lambda: login_func(self.Username.get(), self.Password.get()))
         self.continue_button.place(relx=0.75, rely=0.8, relheight=0.1, relwidth=0.1875)        
-
-    def continue_button_func(self, command): # later add the main screen here as a screen switch and run it in this func
-        
-        try : 
-            # to feed to mysql
-            self.username = self.Username.get().strip()
-            password = self.Password.get().strip()
-
-            if self.username=='' or password=='':
-                messagebox.showwarning('Credentials', 'Enter Proper Credentials\n(tip : left anything blank ?)')
-            else:
-                # check user
-                if self.db.check_user(self.username, password):
-                    messagebox.showinfo('EntropyZero', 'Welcome !')
-                    # change screen
-                    command('sorter_screen')
-                    self.current_user_return()
-                
-                else:
-                    messagebox.showerror('EntropyZero', 'Invalid Username or Password')
-
-        except Exception as error:
-            messagebox.showerror('Error', error)
 
     def signup_button_func(self, command):
         command('signup_screen')
         self.signup_button.configure(state='disabled')
-
-    def current_user_return(self):
-        self.current_user =  self.username

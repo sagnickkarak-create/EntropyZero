@@ -3,11 +3,11 @@ import shutil
 from database import Tunnel
 from login_screen import Login_Screen
 
-class FolderBuilder:
-    def __init__(self, path):
+class Logic:
+    def __init__(self, path, username):
         self.path = path
         self.tunnel = Tunnel()
-        self.username = Login_Screen.current_user_return()
+        self.username = Login_Screen.current_user
         print(self.username)
     
     def info_getter(self):
@@ -20,6 +20,7 @@ class FolderBuilder:
             self.extensions.append(i['EXTENSION'])
         
     def builder(self):
+        path=Tunnel().path_getter()
         os.chdir(path)
         for i in self.folders:
             os.makedirs(i)
@@ -32,7 +33,7 @@ class FolderBuilder:
         pass
 
 if __name__=='__main__':
-    path = r'G:/TEST/' # TEST is a temporary folder that I made for testing
-    FB = FolderBuilder(path)
+    path = Tunnel().path_getter()
+    FB = Logic(path)
     FB.info_getter()
     FB.builder()
