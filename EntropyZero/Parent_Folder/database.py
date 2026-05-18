@@ -44,7 +44,8 @@ class Tunnel:
 
     def path_getter(self, username): # to get the target path by the user
         try:
-            self.cursor(f'select target_root where username={username}')
+            self.cursor.execute(f"select target_root from users where username='{username}'")
+            return self.cursor.fetchall()[0][0]
         except Exception as error:
             raise error
         

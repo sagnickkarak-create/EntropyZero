@@ -4,6 +4,7 @@ from bootup_screen import Bootup_Screen
 from login_screen import Login_Screen
 from signup_screen import Signup_Screen
 from sorter_screen import Sorter_Screen
+from sorter_logic import Logic
 from tkinter import messagebox
 
 # customizing ctk
@@ -15,6 +16,9 @@ ctk.set_appearance_mode("dark")
 class EntropyZero(ctk.CTk):
     def __init__(self):
         super().__init__()
+
+        # initializing current user variable
+        self.current_user = None
 
         # creating a db instance
         self.sql_tunnel = Tunnel()
@@ -69,6 +73,10 @@ class EntropyZero(ctk.CTk):
             if self.sql_tunnel.check_user(username, password):
                 self.current_user = username
                 messagebox.showinfo('EntropyZero',f'Welcome {username}')
+                self.path = self.sql_tunnel.path_getter(self.current_user)
+                self.logic = Logic(self.path, self.current_user)
+                self.logic.info_getter()
+                self.logic.builder(self.path)
                 self.screen_switch('sorter_screen')
             else:
                 messagebox.showerror('EntropyZero','Invalid username or password')
