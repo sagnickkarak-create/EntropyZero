@@ -1,7 +1,6 @@
 import customtkinter as ctk
 from PIL import Image
 Image.MAX_IMAGE_PIXELS = None
-from tkinter import messagebox
 
 # customizing ctk
 ctk.set_appearance_mode("dark")

@@ -76,7 +76,10 @@ class EntropyZero(ctk.CTk):
                 self.path = self.sql_tunnel.path_getter(self.current_user)
                 self.logic = Logic(self.path, self.current_user)
                 self.logic.info_getter()
-                self.logic.builder(self.path)
+                # self.logic.builder(self.path)
+                self.logic.filename_getter(self.path)
+                self.logic.destination_path_builder(self.path)
+                self.logic.mover(self.path)
                 self.screen_switch('sorter_screen')
             else:
                 messagebox.showerror('EntropyZero','Invalid username or password')
