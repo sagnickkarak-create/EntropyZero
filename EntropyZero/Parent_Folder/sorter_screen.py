@@ -13,7 +13,7 @@ class Sorter_Screen(ctk.CTkFrame):
         super().__init__(master)
 
         # Log_Box
-        self.Log_Box = ctk.CTkTextbox(master=self, fg_color="#024659")
+        self.Log_Box = ctk.CTkTextbox(master=self, fg_color="#000000")
         self.Log_Box.configure(state='disabled')
         self.Log_Box.place(relx=0, rely=0, relwidth=0.5, relheight=1)
 

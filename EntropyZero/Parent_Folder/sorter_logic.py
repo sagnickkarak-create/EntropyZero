@@ -50,7 +50,7 @@ class Logic:
             source_path.append(os.path.normpath(os.path.join(path, file)))
         target_path = []
         for path in self.destination_dict.values() :
-            target_path.append(path+'\\')
+            target_path.append(os.path.normpath(path+'\\'))
         for i in range(len(source_path)):
             shutil.move(source_path[i], target_path[i])
         

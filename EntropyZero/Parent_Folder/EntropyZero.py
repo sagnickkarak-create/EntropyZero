@@ -6,6 +6,7 @@ from signup_screen import Signup_Screen
 from sorter_screen import Sorter_Screen
 from sorter_logic import Logic
 from tkinter import messagebox
+import os
 
 # customizing ctk
 ctk.set_appearance_mode("dark")
@@ -73,7 +74,7 @@ class EntropyZero(ctk.CTk):
             if self.sql_tunnel.check_user(username, password):
                 self.current_user = username
                 messagebox.showinfo('EntropyZero',f'Welcome {username}')
-                self.path = self.sql_tunnel.path_getter(self.current_user)
+                self.path = os.path.normpath(self.sql_tunnel.path_getter(self.current_user))
                 self.logic = Logic(self.path, self.current_user)
                 self.logic.info_getter()
                 # self.logic.builder(self.path)
