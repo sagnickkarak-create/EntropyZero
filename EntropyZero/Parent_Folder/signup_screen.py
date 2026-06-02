@@ -1,6 +1,5 @@
 import customtkinter as ctk
 from PIL import Image
-from tkinter import messagebox
 import os
 
 Image.MAX_IMAGE_PIXELS = None
@@ -12,7 +11,7 @@ ctk.set_appearance_mode("dark")
 banner = Image.open(r"E:\CS PROJECT YOHO\EntropyZero\assets\SIGNUP.png")
 
 class Signup_Screen(ctk.CTkFrame):
-    def __init__(self, master, command, db):
+    def __init__(self, master, db, handle_signup):
         super().__init__(master, bg_color='#000000')
 
         # creating db instance
@@ -63,49 +62,5 @@ class Signup_Screen(ctk.CTkFrame):
                                              corner_radius=30,
                                              width=100,
                                              height=100,
-                                             command= lambda: self.button_functionality(command))
-        self.continue_button.place(relx=0.125, rely=0.833333, relheight=0.0833333, relwidth=0.25)        
-
-    def button_functionality(self, command):
-
-        # to feed to mysql
-        username=self.Username.get().strip()
-        password=self.Password.get().strip()
-        path=self.Target_Path.get().strip()
-
-        try :
-
-            if username == '' or password == '' or path == '':
-                messagebox.showwarning('EntropyZero', 'Enter the required credentials\n(tip : left anything blank ??)')
-
-            if os.path.exists(path) == False :
-                messagebox.showerror('Error', 'Given path doesn\'t exist locally')
-                
-            else :
-                response = messagebox.askquestion('Confirm Credentials', f'username : {username}\npassword : {password}\npath : {path}')
-                if response == 'yes' :
-                    self.sql_tunnel.add_user(username, password, path)
-                    messagebox.showinfo('EntropyZero', 'Account Created Successfully !!')
-
-                    # disable the button
-                    self.continue_button.configure(state='disabled')
-
-                    # to switch screens
-                    command('login_screen')
-                
-                elif response == 'no' :
-                    messagebox.showinfo('EntropyZero', 'Be Cautious This Time')
-                
-        except Exception as error:
-
-            if '1062' in str(error): # 1062 is the error code for unique constraint
-                messagebox.showerror('Error', 'Username already taken')
-            
-            else:
-                messagebox.showerror('Error', f'MySQL error : {error}')
-        
-        
-
-        
-        
-
+                                             command= lambda: handle_signup(self.Username.get(), self.Password.get(), os.path.normpath(self.Target_Path.get())))
+        self.continue_button.place(relx=0.125, rely=0.833333, relheight=0.0833333, relwidth=0.25)
