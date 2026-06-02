@@ -14,7 +14,10 @@ class Sorter_Screen(ctk.CTkFrame):
         self.start_moving = callback_trigger
 
         # Log_Box
-        self.Log_Box = ctk.CTkTextbox(master=self, fg_color="#000000", text_color="#FFB173", font=('Montserrat Black', 10, 'bold'))
+        self.Log_Box = ctk.CTkTextbox(master=self, 
+                                      fg_color="#20221F", 
+                                      text_color="#FFB173", 
+                                      font=('Montserrat Black', 10, 'bold'))
         self.Log_Box.configure(state='disabled')
         self.Log_Box.place(relx=0, rely=0, relwidth=0.5, relheight=1)
 
@@ -27,12 +30,12 @@ class Sorter_Screen(ctk.CTkFrame):
 
         # Sort_button
         sort_button = ctk.CTkButton(self, 
-                                    fg_color="#065B98", 
+                                    fg_color="#002147", 
                                     text_color="#EFDFBB", 
-                                    text="START SORT", 
-                                    font=('Montserrat Black', 25, 'bold'),
+                                    text="SORT >>>", 
+                                    font=('Montserrat Black', 60, 'bold'),
                                     command=self.start_moving)
-        sort_button.place(relx=0.625, rely=0.33333, relwidth=0.25, relheight=0.3)
+        sort_button.place(relx=0.625, rely=0.33333, relwidth=0.25, relheight=0.33)
 
     def log(self, file, destination):
         message = f"✔ SUCCESS : {file} moved to {destination}"
