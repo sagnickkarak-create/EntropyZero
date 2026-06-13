@@ -1,12 +1,13 @@
 import customtkinter as ctk
 from PIL import Image
 Image.MAX_IMAGE_PIXELS = None
+import os
 
 # customizing ctk
 ctk.set_appearance_mode("dark")
 
 # assets
-design = Image.open(r"E:\CS PROJECT YOHO\EntropyZero\assets\Gradient Waves.jpg")
+design = Image.open(os.path.normpath(os.path.join("..", "assets", "Gradient Waves.jpg")))
 
 class Sorter_Screen(ctk.CTkFrame):
     def __init__(self, master, callback_trigger):

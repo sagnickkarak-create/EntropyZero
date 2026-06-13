@@ -8,7 +8,7 @@ Image.MAX_IMAGE_PIXELS = None
 ctk.set_appearance_mode("dark")
 
 # assets
-banner = Image.open(r"E:\CS PROJECT YOHO\EntropyZero\assets\SIGNUP.png")
+banner = Image.open(os.path.normpath(os.path.join("..", "assets", "SIGNUP.png")))
 
 class Signup_Screen(ctk.CTkFrame):
     def __init__(self, master, db, handle_signup):

@@ -5,7 +5,7 @@ class Tunnel:
         try:
             self.db=mysql.connect(host='localhost',
                     user='root',
-                    password='12345',
+                    password='krr@mysql',
                     database='entropyzero')
             self.cursor = self.db.cursor()
         except Exception as error :

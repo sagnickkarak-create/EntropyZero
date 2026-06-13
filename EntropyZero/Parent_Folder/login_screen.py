@@ -1,12 +1,13 @@
 import customtkinter as ctk
 from PIL import Image
 Image.MAX_IMAGE_PIXELS = None
+import os
 
 # customizing ctk
 ctk.set_appearance_mode("dark")
 
 # assets
-banner = Image.open(r"E:\CS PROJECT YOHO\EntropyZero\assets\LOGIN.png")
+banner = Image.open(os.path.normpath(os.path.join("..", "assets", "LOGIN.png")))
 
 class Login_Screen(ctk.CTkFrame):
     def __init__(self, master, switch_command, login_func):

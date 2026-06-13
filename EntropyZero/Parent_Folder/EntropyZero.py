@@ -31,7 +31,7 @@ class EntropyZero(ctk.CTk):
         # self.resizable(False, False)
 
         # icon
-        self.iconbitmap(r"E:\CS PROJECT YOHO\EntropyZero\assets\EntropyZero_icon._ico.ico")
+        self.iconbitmap(os.path.normpath(os.path.join("..", "assets", "EntropyZero_icon._ico.ico")))
 
         # screens
 

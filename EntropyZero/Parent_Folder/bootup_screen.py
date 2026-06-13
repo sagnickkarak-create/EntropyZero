@@ -1,13 +1,14 @@
 import customtkinter as ctk
 from PIL import Image
 Image.MAX_IMAGE_PIXELS = None
+import os
 
 # customizing ctk
 ctk.set_appearance_mode("dark")
 
 # assets
-bg = Image.open(r"E:\CS PROJECT YOHO\EntropyZero\assets\BOOTUP.png")
-logo = Image.open(r"E:\CS PROJECT YOHO\EntropyZero\assets\EntropyZero_icon.png")
+bg = Image.open(os.path.normpath(os.path.join("..", "assets", "BOOTUP.png")))
+logo = Image.open(os.path.normpath(os.path.join("..", "assets", "EntropyZero_icon.png")))
 
 class Bootup_Screen(ctk.CTkFrame):
     def __init__(self, master, command):
