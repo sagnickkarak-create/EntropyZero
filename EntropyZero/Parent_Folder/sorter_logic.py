@@ -23,19 +23,20 @@ class Logic:
         os.chdir(path)
         for i in self.folders:
             os.makedirs(i)
-        print("DONE!")
-
+        os.mkdir(os.path.normpath(os.path.join(path, 'Others')))
+        
     def filename_getter(self, path):
         # this method gets the name of the file and the extensions separately from the target folder
         os.chdir(path)
         self.entities = list(set(os.listdir())-set(['Documents', 'Media', 'Programming', 'System & Compressed']))
         self.files_dict = {}
         for entity in self.entities :
-            file, extension = entity.split('.')[0], '.'+entity.split('.')[1]
+            file, extension = os.path.splitext(entity)
             self.files_dict[file]=extension
 
     def destination_path_builder(self, path):
         self.destination_dict = {}
+        target = 'Others'
         for file in self.files_dict.keys() :
             extension = self.files_dict.get(file)
             for rule in self.tunnel.rules :
