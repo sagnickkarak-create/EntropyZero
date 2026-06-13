@@ -28,7 +28,7 @@ class Logic:
     def filename_getter(self, path):
         # this method gets the name of the file and the extensions separately from the target folder
         os.chdir(path)
-        self.entities = list(set(os.listdir())-set(['Documents', 'Media', 'Programming', 'System & Compressed']))
+        self.entities = list(set(os.listdir())-set(['Documents', 'Media', 'Programming', 'System & Compressed', 'Others']))
         self.files_dict = {}
         for entity in self.entities :
             file, extension = os.path.splitext(entity)
