@@ -1,7 +1,6 @@
 import os
 import shutil 
 from database import Tunnel
-from sorter_screen import Sorter_Screen 
 
 class Logic:
     def __init__(self, path, current_user):
@@ -36,8 +35,8 @@ class Logic:
 
     def destination_path_builder(self, path):
         self.destination_dict = {}
-        target = 'Others'
         for file in self.files_dict.keys() :
+            target = 'Others'
             extension = self.files_dict.get(file)
             for rule in self.tunnel.rules :
                 if rule['EXTENSION'] == extension :
@@ -48,15 +47,12 @@ class Logic:
 
     def mover(self, path):
         try :
-            source_path = []
-            for file in self.entities :
-                source_path.append(os.path.normpath(os.path.join(path, file)))
-            target_path = []
-            for path in self.destination_dict.values() :
-                target_path.append(os.path.normpath(path+'\\'))
-            for i in range(len(source_path)):
-                shutil.move(source_path[i], target_path[i])
-                yield self.entities[i], target_path[i]
+            for entity in self.entities:
+                file, extension = os.path.splitext(entity)
+                source_path = os.path.normpath(os.path.join(path, entity))
+                target_path = self.destination_dict[file]              
+                shutil.move(source_path, target_path)
+                yield entity, target_path
         
         except Exception as e :
             yield "FAILURE", e
