@@ -28,6 +28,9 @@ class Logic:
         # this method gets the name of the file and the extensions separately from the target folder
         os.chdir(path)
         self.entities = list(set(os.listdir())-set(['Documents', 'Media', 'Programming', 'System & Compressed', 'Others']))
+        #Filter out all hidden Mac files immediately(modified for Sree's  Mac)
+        self.entities = [entity for entity in self.entities if not entity.startswith('.')]
+        
         self.files_dict = {}
         for entity in self.entities :
             file, extension = os.path.splitext(entity)
