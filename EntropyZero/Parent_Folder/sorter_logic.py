@@ -49,13 +49,13 @@ class Logic:
             self.destination_dict[file] = clean_target
 
     def mover(self, path):
-        try :
-            for entity in self.entities:
+        for entity in self.entities:
+            try :
                 file, extension = os.path.splitext(entity)
                 source_path = os.path.normpath(os.path.join(path, entity))
                 target_path = self.destination_dict[file]              
                 shutil.move(source_path, target_path)
                 yield entity, target_path
         
-        except Exception as e :
-            yield "FAILURE", e
+            except Exception as e :
+                yield "FAILURE", e
